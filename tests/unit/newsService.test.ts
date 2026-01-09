@@ -17,7 +17,7 @@ describe('newsService', () => {
             <link>http://example.com/story1</link>
             <pubDate>Mon, 01 Jan 2024 10:00:00 GMT</pubDate>
             <source url="http://source1.com">Source 1</source>
-            <description>Summary 1</description>
+            <description>Summary&nbsp;1 &amp; 2</description>
           </item>
           <item>
             <title>Test Story 2</title>
@@ -50,7 +50,7 @@ describe('newsService', () => {
             link: 'http://example.com/story1',
             pubDate: 'Mon, 01 Jan 2024 10:00:00 GMT',
             source: 'Source 1',
-            summary: 'Summary 1',
+            summary: 'Summary 1 & 2',
         });
         expect(global.fetch).toHaveBeenCalledWith(
             expect.stringContaining('https://news.google.com/rss/search?q=Metropolitan%20Water%20District'),
