@@ -44,6 +44,9 @@ This document guides you through verifying the initialization of the FridayDemo 
 - [ ] Locate a story card.
 - [ ] Verify the source name is highlighted (e.g., in blue).
 - [ ] Click a story card and ensure it opens the original article in a new tab.
+- [ ] Verify MWD Seal is displayed in the header next to the title.
+- [ ] Verify stories are sorted by date (newest first).
+- [ ] Verify no raw URLs are visible within the story card text.
 
 ### 9. Main Feed & Refresh Verification
 - [ ] Run `npm run dev`.
