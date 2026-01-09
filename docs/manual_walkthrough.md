@@ -45,6 +45,13 @@ This document guides you through verifying the initialization of the FridayDemo 
 - [ ] Verify the source name is highlighted (e.g., in blue).
 - [ ] Click a story card and ensure it opens the original article in a new tab.
 
+### 9. Main Feed & Refresh Verification
+- [ ] Run `npm run dev`.
+- [ ] Open [http://localhost:3000](http://localhost:3000).
+- [ ] Verify the "Refresh Feed" button is present.
+- [ ] Click the button and ensure the button text temporarily changes to "Refreshing..." and then back.
+- [ ] Verify the "Last checked" timestamp updates.
+
 ## CI/CD Verification
 - [ ] Push changes to GitHub.
 - [ ] Check the Actions tab in the repository.
