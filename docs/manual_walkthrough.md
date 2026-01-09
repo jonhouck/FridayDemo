@@ -26,6 +26,10 @@ This document guides you through verifying the initialization of the FridayDemo 
 - [ ] Run `npm run build`.
 - [ ] Verify the build completes successfully.
 
+### 6. News Service Verification
+- [ ] Run `npm test tests/unit/newsService.test.ts`.
+- [ ] Verify the 4 tests pass (Fetch/Parse, API Error, Network Error, Invalid XML).
+
 ## CI/CD Verification
 - [ ] Push changes to GitHub.
 - [ ] Check the Actions tab in the repository.
