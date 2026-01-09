@@ -39,18 +39,18 @@ describe('newsService', () => {
 
         expect(stories).toHaveLength(2);
         expect(stories[0]).toEqual({
-            title: 'Test Story 1',
-            link: 'http://example.com/story1',
-            pubDate: 'Mon, 01 Jan 2024 10:00:00 GMT',
-            source: 'Source 1',
-            summary: 'Summary 1',
-        });
-        expect(stories[1]).toEqual({
             title: 'Test Story 2',
             link: 'http://example.com/story2',
             pubDate: 'Mon, 01 Jan 2024 11:00:00 GMT',
             source: 'Source 2',
             summary: 'Summary 2',
+        });
+        expect(stories[1]).toEqual({
+            title: 'Test Story 1',
+            link: 'http://example.com/story1',
+            pubDate: 'Mon, 01 Jan 2024 10:00:00 GMT',
+            source: 'Source 1',
+            summary: 'Summary 1',
         });
         expect(global.fetch).toHaveBeenCalledWith(
             expect.stringContaining('https://news.google.com/rss/search?q=Metropolitan%20Water%20District'),

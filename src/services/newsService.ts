@@ -38,15 +38,25 @@ export async function fetchNews(query: string): Promise<NewsStory[]> {
             description?: string[];
         }
 
-        return items.map((item: RssItem) => ({
+        // Helper to strip HTML tags
+        const stripHtml = (html: string) => {
+            return html.replace(/<[^>]*>?/gm, '');
+        };
+
+        const parsedItems = items.map((item: RssItem) => ({
             title: item.title?.[0] || 'No Title',
             link: item.link?.[0] || '#',
             pubDate: item.pubDate?.[0] || '',
             source: typeof item.source?.[0] === 'object' && item.source[0] !== null && '_' in item.source[0]
                 ? item.source[0]._
                 : (item.source?.[0] as string) || 'Unknown Source',
-            summary: item.description?.[0] || 'No summary available',
+            summary: stripHtml(item.description?.[0] || 'No summary available'),
         }));
+
+        // Sort by date descending (newest first)
+        return parsedItems.sort((a: NewsStory, b: NewsStory) => {
+            return new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime();
+        });
     } catch (error) {
         console.error('Error fetching news:', error);
         return [];
