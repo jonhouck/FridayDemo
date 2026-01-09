@@ -10,9 +10,12 @@ test.describe('Home Page', () => {
         // Verify Footer
         await expect(page.locator('footer')).toContainText('MWD News Tracker. Aggregated from Google News.');
 
+        // Wait for client-side load to complete
+        // The "Refresh Feed" button text appears only after loading is false
+        const refreshButton = page.getByRole('button', { name: 'Refresh Feed' });
+        await expect(refreshButton).toBeVisible({ timeout: 10000 }); // Increase timeout just in case
+
         // Verify Story Cards
-        // We expect at least one story card link to be present, or the "No stories" message
-        // Since this is a live test against mock or real data, we check for structure
         const storyLinks = page.locator('a[target="_blank"]');
         const count = await storyLinks.count();
 
@@ -23,6 +26,17 @@ test.describe('Home Page', () => {
             // Fallback check for empty state
             await expect(page.getByText('No stories found at the moment.')).toBeVisible();
         }
+
+        // Verify refresh interaction with network delay to catch the "Refreshing..." state
+        await page.route('/api/stories*', async route => {
+            // Introduce a delay to ensure the loading state is visible
+            await new Promise(f => setTimeout(f, 1000));
+            await route.continue();
+        });
+
+        await refreshButton.click();
+        await expect(page.getByRole('button', { name: 'Refreshing...' })).toBeVisible();
+        await expect(refreshButton).toBeVisible(); // Should return to normal
     });
 
     test('should have correct title', async ({ page }) => {
