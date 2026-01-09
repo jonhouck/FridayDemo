@@ -7,7 +7,8 @@ This document guides you through verifying the initialization of the FridayDemo 
 ### 1. Development Server
 - [ ] Run `npm run dev` in the terminal.
 - [ ] Open [http://localhost:3000](http://localhost:3000).
-- [ ] Verify the page loads and shows "To get started, edit the page.tsx file.".
+- [ ] Verify the page loads and displays "MWD News Tracker" in the header.
+- [ ] Verify a list of news story cards is displayed.
 
 ### 2. Linting
 - [ ] Run `npm run lint`.
@@ -35,6 +36,14 @@ This document guides you through verifying the initialization of the FridayDemo 
 - [ ] Visit `http://localhost:3000/api/stories` in your browser.
 - [ ] Verify you receive a JSON response with a list of stories (max 10).
 - [ ] Stop the server.
+
+### 8. Story Card and UI Verification
+- [ ] Run `npm run dev`.
+- [ ] Open [http://localhost:3000](http://localhost:3000).
+- [ ] Verify the "Corporate Chic" aesthetic (Dark background, clean typography).
+- [ ] Locate a story card.
+- [ ] Verify the source name is highlighted (e.g., in blue).
+- [ ] Click a story card and ensure it opens the original article in a new tab.
 
 ## CI/CD Verification
 - [ ] Push changes to GitHub.
