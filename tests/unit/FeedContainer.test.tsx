@@ -4,7 +4,7 @@ import "@testing-library/jest-dom";
 
 // Mock StoryCard to avoid testing its implementation details here
 jest.mock("@/app/components/StoryCard", () => ({
-    StoryCard: ({ story }: { story: any }) => (
+    StoryCard: ({ story }: { story: { title: string } }) => (
         <div data-testid="story-card">{story.title}</div>
     ),
 }));
