@@ -49,7 +49,8 @@ describe('newsService', () => {
             source: 'Source 2',
         });
         expect(global.fetch).toHaveBeenCalledWith(
-            expect.stringContaining('https://news.google.com/rss/search?q=Metropolitan%20Water%20District')
+            expect.stringContaining('https://news.google.com/rss/search?q=Metropolitan%20Water%20District'),
+            { next: { revalidate: 900 } }
         );
     });
 

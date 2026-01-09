@@ -30,6 +30,12 @@ This document guides you through verifying the initialization of the FridayDemo 
 - [ ] Run `npm test tests/unit/newsService.test.ts`.
 - [ ] Verify the 4 tests pass (Fetch/Parse, API Error, Network Error, Invalid XML).
 
+### 7. API Stories Verification
+- [ ] Run `npm run dev`.
+- [ ] Visit `http://localhost:3000/api/stories` in your browser.
+- [ ] Verify you receive a JSON response with a list of stories (max 10).
+- [ ] Stop the server.
+
 ## CI/CD Verification
 - [ ] Push changes to GitHub.
 - [ ] Check the Actions tab in the repository.

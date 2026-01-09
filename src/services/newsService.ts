@@ -12,7 +12,7 @@ export async function fetchNews(query: string): Promise<NewsStory[]> {
     const url = `https://news.google.com/rss/search?q=${encodedQuery}`;
 
     try {
-        const response = await fetch(url);
+        const response = await fetch(url, { next: { revalidate: 900 } });
         if (!response.ok) {
             throw new Error(`Failed to fetch news: ${response.statusText}`);
         }
