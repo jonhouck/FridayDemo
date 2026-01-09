@@ -1,19 +1,30 @@
-import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
-import Page from '../../src/app/page'
+import '@testing-library/jest-dom';
+import { render, screen } from '@testing-library/react';
+import Home from '../../src/app/page';
+
+// Mock the newsService
+jest.mock('../../src/services/newsService', () => ({
+    fetchNews: jest.fn().mockResolvedValue([
+        {
+            title: 'Mock Story 1',
+            link: 'http://mock.com/1',
+            pubDate: '2024-01-01',
+            source: 'Mock Source',
+            summary: 'Mock Summary'
+        }
+    ]),
+}));
 
 describe('Page', () => {
-    it('renders a heading', () => {
-        render(<Page />)
+    it('renders stories correctly', async () => {
+        // As an async Server Component, we call it directly to get the React Node
+        const jsx = await Home();
+        render(jsx);
 
-        const heading = screen.getByRole('heading', { level: 1 })
+        const heading = screen.getByRole('heading', { level: 1 });
+        expect(heading).toHaveTextContent('MWD News Tracker');
 
-        expect(heading).toBeInTheDocument() // Check if heading exists 
-        // In default Next.js, it might not have a h1, so check for text "Get started" or similar if we haven't modified page.tsx
-        // Actually, default create-next-app with tailwind has a lot of content. 
-        // Let's modify page.tsx to fail safe or check for something that definitely exists.
-        // Better: Write a test that passes on default nextjs page.
-        // Existing page probably has "Docs" or "Deploy" links, or "Next.js" text.
-        // Let's modify page.tsx to be simpler for this demo or just check for something likely.
-    })
-})
+        expect(screen.getByText('Mock Story 1')).toBeInTheDocument();
+        expect(screen.getByText('Mock Source')).toBeInTheDocument();
+    });
+});
