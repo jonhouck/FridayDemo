@@ -1,4 +1,4 @@
-import { fetchNews, NewsStory } from '../../src/services/newsService';
+import { fetchNews } from '../../src/services/newsService';
 
 // Mock global fetch
 global.fetch = jest.fn();

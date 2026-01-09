@@ -29,11 +29,20 @@ export async function fetchNews(query: string): Promise<NewsStory[]> {
 
         const items = result.rss.channel[0].item;
 
-        return items.map((item: any) => ({
+        interface RssItem {
+            title?: string[];
+            link?: string[];
+            pubDate?: string[];
+            source?: Array<{ _: string } | string>;
+        }
+
+        return items.map((item: RssItem) => ({
             title: item.title?.[0] || 'No Title',
             link: item.link?.[0] || '#',
             pubDate: item.pubDate?.[0] || '',
-            source: item.source?.[0]?._ || item.source?.[0] || 'Unknown Source',
+            source: typeof item.source?.[0] === 'object' && item.source[0] !== null && '_' in item.source[0]
+                ? item.source[0]._
+                : (item.source?.[0] as string) || 'Unknown Source',
         }));
     } catch (error) {
         console.error('Error fetching news:', error);
