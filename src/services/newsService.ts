@@ -38,9 +38,18 @@ export async function fetchNews(query: string): Promise<NewsStory[]> {
             description?: string[];
         }
 
-        // Helper to strip HTML tags
-        const stripHtml = (html: string) => {
-            return html.replace(/<[^>]*>?/gm, '');
+        // Helper to strip HTML tags and decode entities
+        const cleanText = (html: string) => {
+            let text = html.replace(/<[^>]*>?/gm, '');
+            text = text
+                .replace(/\u00A0/g, ' ')
+                .replace(/&nbsp;/g, ' ')
+                .replace(/&amp;/g, '&')
+                .replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+                .replace(/&quot;/g, '"')
+                .replace(/&#39;/g, "'");
+            return text.trim();
         };
 
         const parsedItems = items.map((item: RssItem) => ({
@@ -50,7 +59,7 @@ export async function fetchNews(query: string): Promise<NewsStory[]> {
             source: typeof item.source?.[0] === 'object' && item.source[0] !== null && '_' in item.source[0]
                 ? item.source[0]._
                 : (item.source?.[0] as string) || 'Unknown Source',
-            summary: stripHtml(item.description?.[0] || 'No summary available'),
+            summary: cleanText(item.description?.[0] || 'No summary available'),
         }));
 
         // Sort by date descending (newest first)
