@@ -7,6 +7,7 @@ export async function GET() {
         const topStories = stories.slice(0, 10);
         return NextResponse.json(topStories);
     } catch (error) {
+        console.error('Error in GET /api/stories:', error);
         return NextResponse.json(
             { error: 'Failed to fetch stories' },
             { status: 500 }

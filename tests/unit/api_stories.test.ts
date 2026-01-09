@@ -3,7 +3,6 @@
  */
 import { GET } from '@/app/api/stories/route';
 import { fetchNews } from '@/services/newsService';
-import { NextResponse } from 'next/server';
 
 // Mock the newsService
 jest.mock('@/services/newsService', () => ({
